@@ -45,7 +45,15 @@ app.post('/api/pedido', async (req, res) => {
         res.status(500).send('Error al guardar el pedido');
     }
 });
-
+app.get('/api/pedidos', async (req, res) => {
+    try {
+        const pedidos = await Pedido.find(); // Obtiene todos los pedidos de la base de datos
+        res.status(200).json(pedidos); // Devuelve los pedidos en formato JSON
+    } catch (error) {
+        console.error('Error al obtener los pedidos:', error);
+        res.status(500).send('Error al obtener los pedidos');
+    }
+});
 // Iniciar el servidor
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
