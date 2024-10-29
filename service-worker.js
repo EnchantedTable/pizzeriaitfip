@@ -1,41 +1,47 @@
-const CACHE_NAME = 'pizzeria-cache-v1';
-const urlsToCache = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/icons/pizzah.png',
-    '/icons/pizzah.png'
+// Nombres para la cache
+const CACHE_NAME = 'pizza-pwa-v1';
+const URLS_TO_CACHE = [
+  'public/index.html', // Página principal
+  'public/index.html',
+  'public/styles.css',
+  'manifest.json',
+  'main.js', // Si tienes un archivo JS externo
+  'icons/p-192.png', // Icono PWA
+  'icons/p-512.png'
 ];
 
-self.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache => {
-                return cache.addAll(urlsToCache);
-            })
-    );
+// Evento de instalación: Cachea los recursos al instalar el Service Worker
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('Archivos cacheados correctamente');
+      return cache.addAll(URLS_TO_CACHE);
+    }).catch(error => console.error('Error al cachear:', error))
+  );
 });
 
-self.addEventListener('activate', (event) => {
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cacheName => {
-                    if (cacheName !== CACHE_NAME) {
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
+// Evento de activación: Limpia la cache antigua si hay una nueva versión
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames =>
+      Promise.all(
+        cacheNames.map(cache => {
+          if (cache !== CACHE_NAME) {
+            console.log('Cache antiguo eliminado:', cache);
+            return caches.delete(cache);
+          }
         })
-    );
+      )
+    )
+  );
 });
 
-self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                return response || fetch(event.request);
-            })
-    );
+// Evento fetch: Responde con recursos cacheados o hace una petición a la red
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      // Si el recurso está en cache, lo devuelve; si no, lo pide a la red
+      return response || fetch(event.request);
+    }).catch(() => caches.match('/index.html')) // Si todo falla, carga la página principal
+  );
 });
