@@ -15,7 +15,7 @@ const mongoURI = "mongodb+srv://faroy2005:YpKAgMDkuUgwRflr@pizzeria.hee9g.mongod
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Conectado a la base de datos"))
-    .catch(err => console.log(err));
+    .catch(err => console.error("Error de conexión a MongoDB:", err)); // Imprimir error de conexión
 
 
 // Esquema de Pedido
@@ -41,6 +41,7 @@ app.post('/api/pedido', async (req, res) => {
         await nuevoPedido.save();
         res.status(201).send('Pedido guardado');
     } catch (error) {
+        console.error("Error al guardar el pedido:", error); // Imprimir error al guardar
         res.status(500).send('Error al guardar el pedido');
     }
 });
