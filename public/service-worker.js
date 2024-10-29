@@ -4,7 +4,6 @@ const URLS_TO_CACHE = [
   'index.html', // Página principal
   'styles.css',
   'manifest.json',
-  '/icons/p-192.png', // Icono PWA
   '/icons/p-512.png'
 ];
 
