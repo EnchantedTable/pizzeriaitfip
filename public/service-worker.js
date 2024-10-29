@@ -4,7 +4,7 @@ const URLS_TO_CACHE = [
   'index.html', // Página principal
   'styles.css',
   'manifest.json',
-  '/icons/p-512.png'
+  'p-512.png'
 ];
 
 // Evento de instalación: Cachea los recursos al instalar el Service Worker
