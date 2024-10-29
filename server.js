@@ -39,7 +39,7 @@ app.post('/api/pedido', async (req, res) => {
 
     try {
         await nuevoPedido.save();
-        res.status(201).send('Pedido guardado');
+        res.redirect('/success.html');
     } catch (error) {
         console.error("Error al guardar el pedido:", error); // Imprimir error al guardar
         res.status(500).send('Error al guardar el pedido');
