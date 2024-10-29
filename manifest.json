@@ -2,7 +2,7 @@
     "name": "Pizzeria",
     "short_name": "Pizzeria",
     "description": "Ordena pizzas rápidamente desde tu dispositivo.",
-    "start_url":"index.html",
+    "start_url":"/public/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#28a745",
