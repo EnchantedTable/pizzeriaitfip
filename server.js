@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // Servir archivos estáticos
 
 // Conectar a MongoDB (ajusta la URI con tus credenciales)
-const mongoURI = "mongodb+srv://faroy2005:<db_password>@pizzeria.hee9g.mongodb.net/?retryWrites=true&w=majority&appName=pizzeria";
+const mongoURI = "mongodb+srv://faroy2005:YpKAgMDkuUgwRflr@pizzeria.hee9g.mongodb.net/?retryWrites=true&w=majority&appName=pizzeria";
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Conectado a la base de datos"))
