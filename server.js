@@ -11,9 +11,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // Servir archivos estáticos
 
 // Conectar a MongoDB (ajusta la URI con tus credenciales)
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+const mongoURI = "mongodb+srv://faroy2005:<db_password>@pizzeria.hee9g.mongodb.net/?retryWrites=true&w=majority&appName=pizzeria";
+
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Conectado a la base de datos"))
     .catch(err => console.log(err));
+
 
 // Esquema de Pedido
 const pedidoSchema = new mongoose.Schema({
