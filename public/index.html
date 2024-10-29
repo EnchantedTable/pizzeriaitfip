@@ -10,7 +10,7 @@
 <body>
     <div class="form-container">
         <h2>Ordenar Pizza</h2>
-        <form id="pizzaForm" action="/api/pedido" method="POST">
+        <form id="pizzaForm" action="api/pedido" method="POST">
             <!-- Número de Mesa -->
             <label for="mesa">Número de Mesa:</label>
             <input type="number" id="mesa" name="mesa" min="1" required>
@@ -51,6 +51,19 @@
             toggleButton.textContent = isNightMode ? 'Modo Claro' : 'Modo Nocturno';
         });
     </script>
+
+    <!-- Script para registrar el Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registrado con éxito:', registration);
+                })
+                .catch(error => {
+                    console.error('Fallo en el registro del Service Worker:', error);
+                });
+        }
+    </script>
 </body>
-<script src="/main.js"></script>
 </html>
+
