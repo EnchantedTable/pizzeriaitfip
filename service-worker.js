@@ -5,7 +5,6 @@ const URLS_TO_CACHE = [
   '/public/index.html',
   '/public/styles.css',
   'manifest.json',
-  'main.js', // Si tienes un archivo JS externo
   '/icons/p-192.png', // Icono PWA
   '/icons/p-512.png'
 ];
