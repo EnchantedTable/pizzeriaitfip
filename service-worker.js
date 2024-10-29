@@ -2,7 +2,6 @@
 const CACHE_NAME = 'pizza-pwa-v1';
 const URLS_TO_CACHE = [
   '/public/index.html', // Página principal
-  '/public/index.html',
   '/public/styles.css',
   'manifest.json',
   '/icons/p-192.png', // Icono PWA
