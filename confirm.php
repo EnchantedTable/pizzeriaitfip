@@ -1,16 +1,5 @@
 <?php
-// Establecer conexión con la base de datos
-$servername = "localhost";
-$username = "root"; // Cambia si tienes un usuario diferente
-$password = ""; // Cambia si tienes una contraseña
-$dbname = "pizzeria";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
 
 // Obtener datos del formulario
 $mesa = $_POST['mesa'];
