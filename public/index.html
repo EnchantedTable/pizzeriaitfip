@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Pedido de Pizza</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Ordenar Pizza</h2>
+        <form id="pizzaForm" action="/api/pedido" method="POST">
+            <!-- Número de Mesa -->
+            <label for="mesa">Número de Mesa:</label>
+            <input type="number" id="mesa" name="mesa" min="1" required>
+
+            <!-- Tipo de Pizza -->
+            <label for="pizza">Tipo de Pizza:</label>
+            <select id="pizza" name="pizza" required>
+                <option value="">Seleccione una opción</option>
+                <option value="Margarita">Margarita</option>
+                <option value="Pepperoni">Pepperoni</option>
+                <option value="Cuatro Quesos">Cuatro Quesos</option>
+            </select>
+
+            <!-- Cantidad de Pizzas -->
+            <label for="cantidad">Cantidad de Pizzas:</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" value="1" required>
+
+            <!-- Botón de Confirmación -->
+            <button type="submit">Finalizar Pedido</button>
+        </form>
+
+        <!-- Botón de Modo Nocturno -->
+        <button id="toggleMode">Modo Nocturno</button>
+    </div>
+
+    <script>
+        const toggleButton = document.getElementById('toggleMode');
+        let isNightMode = false;
+
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('night-mode');
+            isNightMode = !isNightMode;
+            toggleButton.textContent = isNightMode ? 'Modo Claro' : 'Modo Nocturno';
+        });
+    </script>
+</body>
+</html>
