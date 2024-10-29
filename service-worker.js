@@ -42,6 +42,6 @@ self.addEventListener('fetch', event => {
     caches.match(event.request).then(response => {
       // Si el recurso está en cache, lo devuelve; si no, lo pide a la red
       return response || fetch(event.request);
-    }).catch(() => caches.match('/index.html')) // Si todo falla, carga la página principal
+    }).catch(() => caches.match('public/index.html')) // Si todo falla, carga la página principal
   );
 });
