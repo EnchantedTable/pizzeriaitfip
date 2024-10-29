@@ -26,6 +26,10 @@ body {
     text-align: center;
 }
 
+.night-mode .form-container {
+    background-color: #444; /* Fondo más oscuro para el contenedor en modo nocturno */
+}
+
 h2 {
     margin-bottom: 20px;
 }
@@ -41,6 +45,13 @@ input, select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.night-mode input,
+.night-mode select {
+    background-color: #555; /* Fondo de los inputs y selects en modo nocturno */
+    color: #fff; /* Color de texto en inputs y selects */
+    border: 1px solid #888; /* Borde más claro para los inputs y selects */
 }
 
 button {
@@ -59,9 +70,9 @@ button:hover {
 }
 
 .night-mode button {
-    background-color: #555;
+    background-color: #555; /* Fondo del botón en modo nocturno */
 }
 
 .night-mode button:hover {
-    background-color: #777;
+    background-color: #777; /* Fondo del botón al pasar el cursor en modo nocturno */
 }
