@@ -1,13 +1,13 @@
 // Nombres para la cache
 const CACHE_NAME = 'pizza-pwa-v1';
 const URLS_TO_CACHE = [
-  'public/index.html', // Página principal
-  'public/index.html',
-  'public/styles.css',
+  '/public/index.html', // Página principal
+  '/public/index.html',
+  '/public/styles.css',
   'manifest.json',
   'main.js', // Si tienes un archivo JS externo
-  'icons/p-192.png', // Icono PWA
-  'icons/p-512.png'
+  '/icons/p-192.png', // Icono PWA
+  '/icons/p-512.png'
 ];
 
 // Evento de instalación: Cachea los recursos al instalar el Service Worker
