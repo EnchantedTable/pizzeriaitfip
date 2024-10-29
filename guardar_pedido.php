@@ -46,7 +46,7 @@ $conn->close();
         <h2>Estado del Pedido</h2>
         <div class="success-message">
             <?php if (isset($pedidoGuardado) && $pedidoGuardado): ?>
-                <img src="images/exito.png" alt="Éxito" class="check-icon">
+                <img src="exito.png" alt="Éxito" class="check-icon">
                 <p>Tu pedido ha sido realizado exitosamente.</p>
                 <a href="index.html" class="button">Volver al inicio</a>
             <?php else: ?>
