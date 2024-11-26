@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Obtener datos del formulario
-$mesa = $_POST['mesa'];
+$mesa = $_POST['mes'];
 $pizza = $_POST['pizza'];
 $cantidad = $_POST['cantidad'];
 
