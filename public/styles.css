@@ -13,22 +13,24 @@ body {
     padding: 0 20px;
 }
 
-/* Barra de navegación */
+/* Barra de Navegación - Horizontal en la parte superior */
 nav {
     background-color: #d9534f;  /* Rojo tipo restaurante */
     color: #fff;
-    padding: 15px 0;
+    padding: 10px 0;
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
     list-style: none;
+    display: flex; /* Hace que los elementos sean horizontales */
+    justify-content: center; /* Centra los elementos */
+    padding: 0;
 }
 
 nav ul li {
-    display: inline;
-    margin: 0 20px;
+    margin: 0 20px; /* Espaciado entre los elementos */
 }
 
 nav ul li a {
@@ -36,10 +38,15 @@ nav ul li a {
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
+    padding: 10px 20px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
 }
 
 nav ul li a:hover {
-    color: #f0ad4e;  /* Naranja claro en hover */
+    background-color: #f0ad4e;  /* Naranja claro en hover */
+    color: #fff;
 }
 
 /* Estilo de los contenedores */
@@ -95,21 +102,6 @@ input[type="number"], select {
 input[type="number"]:focus, select:focus {
     border-color: #f0ad4e;  /* Naranja cuando se selecciona */
     outline: none;
-}
-
-/* Listado de pedidos */
-#ordersList, #pedidosList {
-    list-style: none;
-    padding: 0;
-}
-
-#ordersList li, #pedidosList li {
-    background-color: #fff;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 16px;
 }
 
 /* Diseño de la página de detalles de pizzas */
