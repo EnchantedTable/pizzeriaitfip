@@ -71,28 +71,7 @@
             justify-content: flex-start;
             align-items: center;
             min-height: calc(100vh - 60px); /* Ocupa toda la altura visible menos la navbar */
-            padding-top: 60px; /* Espacio para la barra fija */
-        }
-
-        /* Estilo del botón "Realizar pedido" */
-        #btn {
-            background-color: #f0ad4e; /* Naranja restaurante */
-            color: #333;
-            text-decoration: none;
-            padding: 14px 30px; /* Aumentamos el tamaño del padding */
-            border-radius: 5px;
-            font-size: 18px; /* Aumentamos el tamaño de la fuente */
-            margin-top: 20px; /* Espaciado superior */
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            text-align: center; /* Asegura que el texto esté centrado en el botón */
-            display: inline-block; /* Para que no ocupe todo el ancho */
-            border: none; /* Eliminamos borde */
-        }
-
-        #btn:hover {
-            background-color: #d9534f; /* Rojo restaurante en hover */
-            color: white;
-            transform: scale(1.1); /* Efecto de agrandado al pasar el cursor */
+            padding-top: 80px; /* Ajustamos el espacio para que el contenido no quede tapado por la navbar */
         }
 
         /* Sección de descripción de las pizzas */
@@ -146,6 +125,22 @@
             max-width: 200px; /* Ajusta el tamaño máximo del logo */
             height: auto;
         }
+
+        /* Botón "Realizar pedido" */
+        .btn {
+            background-color: #f0ad4e; /* Naranja restaurante */
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #d9534f; /* Rojo restaurante en hover */
+        }
     </style>
 </head>
 <body>
@@ -187,7 +182,7 @@
             </div>
 
             <!-- Botón de Realizar pedido -->
-            <a href="login.html" class="btn" id="btn">Realizar pedido</a>
+            <a href="login.html" class="btn">Realizar pedido</a>
         </section>
     </div>
 
