@@ -36,35 +36,44 @@
 
     <script>
         document.getElementById('pedidoForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
 
-            // Recoger los datos del formulario
-            const formData = new FormData(this);
-            const data = {
-                mesa: formData.get('mesa'),
-                pizza: formData.get('pizza'),
-                cantidad: formData.get('cantidad')
-            };
+            // Recoger los datos del formulario manualmente
+            const mesa = document.getElementById('mesa').value;
+            const pizza = document.getElementById('pizza').value;
+            const cantidad = document.getElementById('cantidad').value;
 
-            try {
-                // Enviar los datos al servidor
-                const response = await fetch('/api/pedido', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
+            // Verificamos si los valores fueron recogidos correctamente
+            console.log('Mesa:', mesa);
+            console.log('Pizza:', pizza);
+            console.log('Cantidad:', cantidad);
 
-                if (response.ok) {
-                    alert('Pedido realizado con éxito');
-                    // Redirigir o limpiar el formulario si es necesario
-                } else {
+            // Si los datos son correctos, enviarlos al servidor
+            if (mesa && pizza && cantidad) {
+                const data = { mesa, pizza, cantidad };
+
+                try {
+                    // Enviar los datos al servidor
+                    const response = await fetch('/api/pedido', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                        const responseData = await response.json();
+                        alert('Pedido realizado con éxito: ' + responseData.message);
+                    } else {
+                        alert('Hubo un error al realizar el pedido');
+                    }
+                } catch (error) {
+                    console.error('Error al enviar el pedido:', error);
                     alert('Hubo un error al realizar el pedido');
                 }
-            } catch (error) {
-                console.error('Error al enviar el pedido:', error);
-                alert('Hubo un error al realizar el pedido');
+            } else {
+                alert('Por favor, rellena todos los campos.');
             }
         });
 
