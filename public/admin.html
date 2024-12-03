@@ -5,6 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administrador</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset de estilos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f8f4e3; /* Fondo crema suave */
+            color: #333;
+            padding: 0 20px;
+        }
+
+        /* Barra de Navegación - Horizontal en la parte superior */
+        nav {
+            background-color: #d9534f;  /* Rojo tipo restaurante */
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Asegura que la barra cubra todo el ancho */
+            position: fixed; /* La hace fija en la parte superior */
+            top: 0; /* Pegada al borde superior */
+            left: 0; /* Alineada al borde izquierdo */
+            z-index: 1000; /* Asegura que esté encima de otros elementos */
+        }
+
+        /* Lista de navegación */
+        nav ul {
+            list-style: none;
+            display: flex; /* Hace que los elementos sean horizontales */
+            justify-content: center; /* Centra los elementos */
+            padding: 0;
+            margin: 0; /* Elimina cualquier margen extra */
+        }
+
+        nav ul li {
+            margin: 0 20px; /* Espaciado entre los elementos */
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 10px 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: #f0ad4e;  /* Naranja claro en hover */
+            color: #fff;
+        }
+
+        /* Contenedor principal de la sección */
+        #main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: calc(100vh - 60px); /* Ocupa toda la altura visible menos la navbar */
+            padding-top: 60px; /* Espacio para la barra fija */
+        }
+
+        /* Estilo de la sección de administración */
+        section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Ancho máximo del contenedor */
+            margin-top: 80px; /* Espacio debajo de la barra de navegación */
+            width: 100%; /* Ocupa todo el ancho disponible */
+        }
+
+        section h2 {
+            color: #d9534f; /* Rojo para los encabezados */
+            margin-bottom: 20px;
+        }
+
+        section h3 {
+            color: #d9534f; /* Rojo para los subtítulos */
+            margin-bottom: 20px;
+        }
+
+        /* Estilo de los botones */
+        section button {
+            background-color: #f0ad4e; /* Naranja restaurante */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        section button:hover {
+            background-color: #d9534f; /* Rojo restaurante en hover */
+        }
+
+        /* Estilo de la tabla de pizzas */
+        #pizzasTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #pizzasTable th, #pizzasTable td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        #pizzasTable th {
+            background-color: #f0ad4e;
+            color: white;
+        }
+
+        #pizzasTable td button {
+            background-color: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #pizzasTable td button:hover {
+            background-color: #d9534f;
+        }
+
+    </style>
 </head>
 <body>
     <!-- Barra de Navegación Cargada Dinámicamente -->
@@ -16,10 +160,9 @@
         <!-- Sección de administración -->
         <section>
             <h2>Gestión de Pizzas</h2>
-            <button onclick="verPizzas()">Ver Pizzas Guardadas</button>
+
             <button onclick="crearPizza()">Crear Pizza</button>
             <button onclick="editarPizza()">Editar Pizza</button>
-            <button onclick="eliminarPizza()">Eliminar Pizza</button>
 
             <h3>Historial de Pedidos</h3>
             <button onclick="verHistorialPedidos()">Ver Historial Global de Pedidos</button>
@@ -61,7 +204,6 @@
                     <td>${pizza.precio}</td>
                     <td>
                         <button onclick="editarPizzaForm('${pizza._id}')">Editar</button>
-                        <button onclick="eliminarPizza('${pizza._id}')">Eliminar</button>
                     </td>
                 `;
                 pizzasBody.appendChild(row);
@@ -112,23 +254,6 @@
                 cargarPizzas();  // Recargar la lista de pizzas
             } else {
                 alert('Error al actualizar la pizza');
-            }
-        }
-
-        // Función para eliminar una pizza
-        async function eliminarPizza(id) {
-            const confirmDelete = confirm("¿Estás seguro de eliminar esta pizza?");
-            if (confirmDelete) {
-                const response = await fetch(`/api/pizza/${id}`, {
-                    method: 'DELETE',
-                });
-
-                if (response.ok) {
-                    alert('Pizza eliminada con éxito');
-                    cargarPizzas();  // Recargar la lista de pizzas
-                } else {
-                    alert('Error al eliminar la pizza');
-                }
             }
         }
 
