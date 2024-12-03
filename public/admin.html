@@ -158,8 +158,14 @@
     <div id="main-container">
 
         <!-- Sección de administración -->
-
         <section>
+            <h2>Crear Pizza</h2>
+            <form id="createPizzaForm">
+                <label for="pizzaNombre">Nombre de la Pizza:</label>
+                <input type="text" id="pizzaNombre" name="pizzaNombre" required>
+                <button type="submit">Crear Pizza</button>
+            </form>
+
             <h3>Lista de Pedidos</h3>
             <table id="pedidosTable">
                 <thead>
@@ -189,7 +195,7 @@
 
             pedidos.forEach(pedido => {
                 const row = document.createElement('tr');
-                row.innerHTML = `
+                row.innerHTML = ` 
                     <td>${pedido.mesa}</td>
                     <td>${pedido.pizza}</td>
                     <td>${pedido.cantidad}</td>
@@ -197,6 +203,30 @@
                 `;
                 pedidosBody.appendChild(row);
             });
+        }
+
+        // Función para crear una nueva pizza
+        async function crearPizza(event) {
+            event.preventDefault();
+
+            const pizzaNombre = document.getElementById('pizzaNombre').value;
+
+            try {
+                const response = await fetch('/api/pizza', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre: pizzaNombre })
+                });
+
+                if (response.ok) {
+                    alert('Pizza creada con éxito');
+                    cargarPedidos();  // Recargar pedidos si es necesario
+                } else {
+                    alert('Hubo un error al crear la pizza');
+                }
+            } catch (error) {
+                console.error('Error al crear la pizza:', error);
+            }
         }
 
         // Cargar los pedidos al cargar la página
@@ -208,6 +238,9 @@
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
             });
+
+        // Añadir evento de envío del formulario para crear la pizza
+        document.getElementById('createPizzaForm').addEventListener('submit', crearPizza);
     </script>
 </body>
 </html>
