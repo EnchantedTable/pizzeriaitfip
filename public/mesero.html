@@ -45,6 +45,35 @@
             color: white;
         }
 
+        /* Menú de navegación */
+        nav ul {
+            list-style: none;
+            display: flex; /* Hace que los elementos sean horizontales */
+            margin: 0;
+            padding: 0; /* Elimina cualquier margen extra */
+        }
+
+        nav ul li {
+            margin: 0 15px; /* Espaciado entre los elementos */
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: #f0ad4e; /* Naranja claro en hover */
+            color: #fff;
+        }
+
         /* Contenedor principal de la sección */
         #main-container {
             display: flex;
@@ -52,7 +81,7 @@
             justify-content: flex-start;
             align-items: center;
             min-height: calc(100vh - 60px); /* Ocupa toda la altura visible menos la navbar */
-            padding-top: 60px; /* Espacio para la barra fija */
+            padding-top: 80px; /* Ajuste para que el contenido no quede tapado por la navbar */
         }
 
         /* Estilo de la sección de mesero */
