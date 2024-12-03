@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizzería</title>
+    <title>Login</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Barra de Navegación Cargada Dinámicamente -->
     <div id="navbar-placeholder"></div>
 
-    <section id="intro">
-        <h1>Bienvenido a la Pizzería</h1>
-        <p>Elige la pizza que más te guste y haz tu pedido fácilmente.</p>
-        <a href="login.html" class="btn">Iniciar Sesión</a>
+    <section id="login">
+        <h2>Iniciar Sesión</h2>
+        <p>Elige cómo quieres iniciar sesión:</p>
+        <button onclick="location.href='invitado.html'">Iniciar como Invitado</button>
+        <button onclick="location.href='mesero.html'">Iniciar como Mesero</button>
+        <button onclick="location.href='admin.html'">Iniciar como Administrador</button>
     </section>
 
     <script>

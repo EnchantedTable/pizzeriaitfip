@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Barra de Navegación Cargada Dinámicamente -->
+    <div id="navbar-placeholder"></div>
+
+    <section>
+        <h2>Gestión de Pizzas</h2>
+        <button onclick="verPizzas()">Ver Pizzas Guardadas</button>
+        <button onclick="crearPizza()">Crear Pizza</button>
+        <button onclick="editarPizza()">Editar Pizza</button>
+        <button onclick="eliminarPizza()">Eliminar Pizza</button>
+
+        <h3>Historial de Pedidos</h3>
+        <button onclick="verHistorialPedidos()">Ver Historial Global de Pedidos</button>
+    </section>
+
+    <script>
+        // Funciones para gestionar las pizzas y ver el historial de pedidos
+        function verPizzas() { 
+            console.log("Ver pizzas guardadas"); 
+            // Lógica para ver las pizzas
+        }
+        function crearPizza() { 
+            console.log("Crear pizza"); 
+            // Lógica para crear una nueva pizza
+        }
+        function editarPizza() { 
+            console.log("Editar pizza"); 
+            // Lógica para editar una pizza existente
+        }
+        function eliminarPizza() { 
+            console.log("Eliminar pizza"); 
+            // Lógica para eliminar una pizza
+        }
+        function verHistorialPedidos() { 
+            console.log("Ver historial global de pedidos"); 
+            // Lógica para ver el historial global de pedidos
+        }
+
+        // Cargar la barra de navegación desde el archivo navbar.html
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

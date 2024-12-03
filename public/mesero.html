@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizzería</title>
+    <title>Panel de Mesero</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Barra de Navegación Cargada Dinámicamente -->
     <div id="navbar-placeholder"></div>
 
-    <section id="intro">
-        <h1>Bienvenido a la Pizzería</h1>
-        <p>Elige la pizza que más te guste y haz tu pedido fácilmente.</p>
-        <a href="login.html" class="btn">Iniciar Sesión</a>
+    <section id="mesero">
+        <h2>Pedidos Pendientes</h2>
+        <div id="pedidosList">
+            <!-- Aquí se cargarán los pedidos pendientes desde la API -->
+        </div>
+
+        <button onclick="despacharPedido()">Despachar Pedido</button>
     </section>
 
     <script>
+        // Lógica para cargar y despachar pedidos
+        function despacharPedido() {
+            // Lógica de despachar pedido
+        }
+
         // Cargar la barra de navegación desde el archivo navbar.html
         fetch('navbar.html')
             .then(response => response.text())

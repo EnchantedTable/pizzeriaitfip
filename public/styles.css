@@ -1,78 +1,206 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+/* Reset de estilos */
+* {
     margin: 0;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.night-mode {
-    background-color: #333;
-    color: #fff;
-}
-
-.form-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.night-mode .form-container {
-    background-color: #444; /* Fondo más oscuro para el contenedor en modo nocturno */
-}
-
-h2 {
-    margin-bottom: 20px;
-}
-
-label {
-    margin: 10px 0 5px;
-}
-
-input, select {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 5px 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 0;
     box-sizing: border-box;
 }
 
-.night-mode input,
-.night-mode select {
-    background-color: #555; /* Fondo de los inputs y selects en modo nocturno */
-    color: #fff; /* Color de texto en inputs y selects */
-    border: 1px solid #888; /* Borde más claro para los inputs y selects */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f4e3; /* Fondo crema suave */
+    color: #333;
+    padding: 0 20px;
 }
 
+/* Barra de navegación */
+nav {
+    background-color: #d9534f;  /* Rojo tipo restaurante */
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+nav ul li a:hover {
+    color: #f0ad4e;  /* Naranja claro en hover */
+}
+
+/* Estilo de los contenedores */
+section {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #d9534f;  /* Rojo para los encabezados */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+h3 {
+    margin-top: 20px;
+}
+
+/* Estilo de los botones */
 button {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #28a745;
+    background-color: #f0ad4e; /* Naranja restaurante */
     color: white;
     border: none;
-    border-radius: 4px;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #d9534f; /* Rojo restaurante en hover */
 }
 
-.night-mode button {
-    background-color: #555; /* Fondo del botón en modo nocturno */
+/* Estilo de formularios */
+input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-.night-mode button:hover {
-    background-color: #777; /* Fondo del botón al pasar el cursor en modo nocturno */
+input[type="number"]:focus, select:focus {
+    border-color: #f0ad4e;  /* Naranja cuando se selecciona */
+    outline: none;
+}
+
+/* Listado de pedidos */
+#ordersList, #pedidosList {
+    list-style: none;
+    padding: 0;
+}
+
+#ordersList li, #pedidosList li {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+/* Diseño de la página de detalles de pizzas */
+.pizza-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.pizza-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.pizza-item:hover {
+    transform: scale(1.05);
+}
+
+.pizza-item h3 {
+    margin-bottom: 10px;
+    color: #d9534f;  /* Rojo para el nombre de las pizzas */
+}
+
+.pizza-item p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.pizza-item button {
+    background-color: #f0ad4e;
+    color: #333;
+}
+
+.pizza-item button:hover {
+    background-color: #d9534f;
+}
+
+/* Estilo de la página de login */
+#login {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+#login button {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+/* Modo Nocturno */
+body.night-mode {
+    background-color: #333;
+    color: #f4f4f4;
+}
+
+body.night-mode button {
+    background-color: #555;
+    color: #f4f4f4;
+}
+
+body.night-mode nav {
+    background-color: #444;
+}
+
+body.night-mode nav ul li a {
+    color: #f4f4f4;
+}
+
+body.night-mode nav ul li a:hover {
+    color: #f0ad4e;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    .pizza-list {
+        grid-template-columns: 1fr;
+    }
 }
