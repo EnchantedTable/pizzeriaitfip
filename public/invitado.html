@@ -193,7 +193,7 @@
 
                     if (response.ok) {
                         const responseData = await response.json();
-                        alert('Pedido realizado con éxito: ' + 'Favor acercarse a caja para cancelar el valor de su pizza');
+                        alert('Por favor acercase a la caja para cancelar su pizza' + responseData.message);
                     } else {
                         alert('Hubo un error al realizar el pedido');
                     }
