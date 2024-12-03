@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizzería Napoli</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
+    <link rel="manifest" href="/manifest.json">
+   <style>
         /* Reset de estilos */
         * {
             margin: 0;
@@ -184,6 +185,19 @@
             .catch(error => {
                 console.error('Error al cargar la barra de navegación:', error);
             });
+
+        // Registrar el Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('Service Worker registrado con éxito:', registration);
+                    })
+                    .catch((error) => {
+                        console.log('Error al registrar el Service Worker:', error);
+                    });
+            });
+        }
     </script>
 </body>
 </html>
