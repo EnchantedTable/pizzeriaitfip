@@ -116,25 +116,25 @@
             background-color: #d9534f; /* Rojo restaurante en hover */
         }
 
-        /* Estilo de la tabla de pizzas */
-        #pizzasTable {
+        /* Estilo de la tabla de pedidos */
+        #pedidosTable {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
 
-        #pizzasTable th, #pizzasTable td {
+        #pedidosTable th, #pedidosTable td {
             padding: 10px;
             text-align: center;
             border: 1px solid #ddd;
         }
 
-        #pizzasTable th {
+        #pedidosTable th {
             background-color: #f0ad4e;
             color: white;
         }
 
-        #pizzasTable td button {
+        #pedidosTable td button {
             background-color: #f0ad4e;
             color: white;
             border: none;
@@ -144,7 +144,7 @@
             transition: background-color 0.3s ease;
         }
 
-        #pizzasTable td button:hover {
+        #pedidosTable td button:hover {
             background-color: #d9534f;
         }
 
@@ -159,28 +159,23 @@
 
         <!-- Sección de administración -->
         <section>
-            <h2>Gestión de Pizzas</h2>
-
-            <button onclick="crearPizza()">Crear Pizza</button>
-            <button onclick="editarPizza()">Editar Pizza</button>
-
-            <h3>Historial de Pedidos</h3>
+            <h2>Historial de Pedidos</h2>
             <button onclick="verHistorialPedidos()">Ver Historial Global de Pedidos</button>
         </section>
 
         <section>
-            <h3>Lista de Pizzas</h3>
-            <table id="pizzasTable">
+            <h3>Lista de Pedidos</h3>
+            <table id="pedidosTable">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Ingredientes</th>
-                        <th>Precio</th>
-                        <th>Acciones</th>
+                        <th>Mesa</th>
+                        <th>Pizza</th>
+                        <th>Cantidad</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
-                <tbody id="pizzasBody">
-                    <!-- Aquí se cargarán las pizzas dinámicamente -->
+                <tbody id="pedidosBody">
+                    <!-- Aquí se cargarán los pedidos dinámicamente -->
                 </tbody>
             </table>
         </section>
@@ -188,73 +183,24 @@
     </div>
 
     <script>
-        // Función para cargar las pizzas
-        async function cargarPizzas() {
-            const response = await fetch('/api/pizzas');
-            const pizzas = await response.json();
+        // Función para cargar los pedidos
+        async function cargarPedidos() {
+            const response = await fetch('/api/pedidos');
+            const pedidos = await response.json();
 
-            const pizzasBody = document.getElementById('pizzasBody');
-            pizzasBody.innerHTML = '';  // Limpiar la tabla antes de cargar los nuevos datos
+            const pedidosBody = document.getElementById('pedidosBody');
+            pedidosBody.innerHTML = '';  // Limpiar la tabla antes de cargar los nuevos datos
 
-            pizzas.forEach(pizza => {
+            pedidos.forEach(pedido => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${pizza.nombre}</td>
-                    <td>${pizza.ingredientes.join(', ')}</td>
-                    <td>${pizza.precio}</td>
-                    <td>
-                        <button onclick="editarPizzaForm('${pizza._id}')">Editar</button>
-                    </td>
+                    <td>${pedido.mesa}</td>
+                    <td>${pedido.pizza}</td>
+                    <td>${pedido.cantidad}</td>
+                    <td>${pedido.estado}</td>
                 `;
-                pizzasBody.appendChild(row);
+                pedidosBody.appendChild(row);
             });
-        }
-
-        // Función para crear una pizza
-        async function crearPizza() {
-            const nombre = prompt("Nombre de la pizza:");
-            const ingredientes = prompt("Ingredientes (separados por coma):").split(',');
-            const precio = prompt("Precio de la pizza:");
-
-            const response = await fetch('/api/pizza', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ nombre, ingredientes, precio })
-            });
-
-            if (response.ok) {
-                alert('Pizza creada con éxito');
-                cargarPizzas();  // Recargar la lista de pizzas
-            } else {
-                alert('Error al crear la pizza');
-            }
-        }
-
-        // Función para editar una pizza
-        async function editarPizzaForm(id) {
-            const response = await fetch(`/api/pizza/${id}`);
-            const pizza = await response.json();
-
-            const nombre = prompt("Nombre de la pizza:", pizza.nombre);
-            const ingredientes = prompt("Ingredientes (separados por coma):", pizza.ingredientes.join(', ')).split(',');
-            const precio = prompt("Precio de la pizza:", pizza.precio);
-
-            const updateResponse = await fetch(`/api/pizza/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ nombre, ingredientes, precio })
-            });
-
-            if (updateResponse.ok) {
-                alert('Pizza actualizada con éxito');
-                cargarPizzas();  // Recargar la lista de pizzas
-            } else {
-                alert('Error al actualizar la pizza');
-            }
         }
 
         // Función para ver el historial de pedidos (simulada)
@@ -262,8 +208,8 @@
             alert('Ver historial de pedidos');
         }
 
-        // Cargar las pizzas al cargar la página
-        window.onload = cargarPizzas;
+        // Cargar los pedidos al cargar la página
+        window.onload = cargarPedidos;
 
         // Cargar la barra de navegación desde el archivo navbar.html
         fetch('navbar.html')
