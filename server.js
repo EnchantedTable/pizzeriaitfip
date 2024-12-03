@@ -93,6 +93,28 @@ app.get('/api/pedidos', async (req, res) => {
     }
 });
 
+// Ruta para actualizar el estado de un pedido (Despachar)
+app.put('/api/pedido/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const pedido = await Pedido.findByIdAndUpdate(
+            id,
+            { estado: 'despachado' }, // Cambiar el estado a 'despachado'
+            { new: true } // Retorna el documento actualizado
+        );
+
+        if (!pedido) {
+            return res.status(404).json({ message: 'Pedido no encontrado' });
+        }
+
+        res.status(200).json({ message: 'Pedido despachado con éxito', pedido });
+    } catch (error) {
+        console.error('Error al despachar el pedido:', error);
+        res.status(500).send('Error al despachar el pedido');
+    }
+});
+
 // Iniciar el servidor
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
