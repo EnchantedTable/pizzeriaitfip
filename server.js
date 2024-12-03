@@ -27,7 +27,26 @@ const pedidoSchema = new mongoose.Schema({
 
 const Pedido = mongoose.model('Pedido', pedidoSchema);
 
-// Ruta para obtener todos los pedidos (historial de pedidos)
+// Ruta para recibir el formulario y agregar un nuevo pedido
+app.post('/api/pedido', async (req, res) => {
+    const { mesa, pizza, cantidad } = req.body;
+
+    const nuevoPedido = new Pedido({
+        mesa,
+        pizza,
+        cantidad
+    });
+
+    try {
+        await nuevoPedido.save();
+        res.status(201).json({ message: 'Pedido realizado con éxito' });
+    } catch (error) {
+        console.error("Error al guardar el pedido:", error);
+        res.status(500).send('Error al guardar el pedido');
+    }
+});
+
+// Ruta para obtener todos los pedidos
 app.get('/api/pedidos', async (req, res) => {
     try {
         const pedidos = await Pedido.find();  // Obtener todos los pedidos
@@ -35,24 +54,6 @@ app.get('/api/pedidos', async (req, res) => {
     } catch (error) {
         console.error('Error al obtener los pedidos:', error);
         res.status(500).send('Error al obtener los pedidos');
-    }
-});
-
-// Ruta para despachar un pedido y actualizar su estado
-app.put('/api/pedido/:id', async (req, res) => {
-    try {
-        const pedidoId = req.params.id;
-
-        // Actualizar el estado del pedido a 'finalizado'
-        const pedido = await Pedido.findByIdAndUpdate(pedidoId, { estado: 'finalizado' }, { new: true });
-        if (!pedido) {
-            return res.status(404).json({ message: 'Pedido no encontrado' });
-        }
-
-        res.status(200).json({ message: 'Pedido despachado', pedido });
-    } catch (error) {
-        console.error('Error al despachar el pedido:', error);
-        res.status(500).send('Error al despachar el pedido');
     }
 });
 
