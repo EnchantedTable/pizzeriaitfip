@@ -23,10 +23,12 @@
 
         /* Barra de Navegación - Horizontal en la parte superior */
         nav {
+            display: flex;
+            justify-content: space-between; /* Espacio entre el título y el menú */
+            align-items: center;
             background-color: #d9534f;  /* Rojo tipo restaurante */
             color: #fff;
-            padding: 10px 0;
-            text-align: center;
+            padding: 10px 20px; /* Espaciado interno */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%; /* Asegura que la barra cubra todo el ancho */
             position: fixed; /* La hace fija en la parte superior */
@@ -35,33 +37,40 @@
             z-index: 1000; /* Asegura que esté encima de otros elementos */
         }
 
-        /* Lista de navegación */
-        nav ul {
+        /* Nombre Napoli alineado a la izquierda */
+        .navbar-title h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            color: white;
+        }
+
+        /* Menú de navegación */
+        .menu-list {
             list-style: none;
-            display: flex; /* Hace que los elementos sean horizontales */
-            justify-content: center; /* Centra los elementos */
+            display: flex;
+            margin: 0;
             padding: 0;
-            margin: 0; /* Elimina cualquier margen extra */
         }
 
-        nav ul li {
-            margin: 0 20px; /* Espaciado entre los elementos */
+        .menu-list li {
+            margin: 0 15px; /* Espaciado entre los elementos */
         }
 
-        nav ul li a {
+        .menu-list li a {
             color: #fff;
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
-            padding: 10px 20px;
-            display: inline-block;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
             transition: background-color 0.3s ease;
             border-radius: 5px;
         }
 
-        nav ul li a:hover {
-            background-color: #f0ad4e;  /* Naranja claro en hover */
-            color: #fff;
+        .menu-list li a:hover {
+            background-color: #f0ad4e; /* Naranja en hover */
         }
 
         /* Contenedor principal de la sección */
@@ -94,61 +103,123 @@
             margin-bottom: 20px;
         }
 
-        /* Estilo de la lista de pedidos */
-        #pedidosList {
+        /* Estilo de la tabla de pedidos */
+        #pedidosTable {
             width: 100%;
+            border-collapse: collapse;
             margin-bottom: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Estilo de los botones */
-        #mesero button {
-            background-color: #f0ad4e; /* Naranja restaurante */
+        #pedidosTable th, #pedidosTable td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        #pedidosTable th {
+            background-color: #f0ad4e;
+            color: white;
+        }
+
+        #pedidosTable td button {
+            background-color: #f0ad4e;
             color: white;
             border: none;
-            padding: 12px 25px;
-            margin-top: 20px;
+            padding: 8px 15px;
             border-radius: 5px;
-            font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        #mesero button:hover {
-            background-color: #d9534f; /* Rojo restaurante en hover */
+        #pedidosTable td button:hover {
+            background-color: #d9534f;
         }
-
     </style>
 </head>
 <body>
+
     <!-- Barra de Navegación Cargada Dinámicamente -->
     <div id="navbar-placeholder"></div>
 
     <!-- Contenedor principal para el contenido -->
     <div id="main-container">
-
         <!-- Sección de Mesero -->
         <section id="mesero">
             <h2>Pedidos Pendientes</h2>
             <div id="pedidosList">
-                <!-- Aquí se cargarán los pedidos pendientes desde la API -->
-                <p>No hay pedidos pendientes.</p> <!-- Aquí se pueden agregar los pedidos dinámicamente -->
+                <table id="pedidosTable">
+                    <thead>
+                        <tr>
+                            <th>Mesa</th>
+                            <th>Pizza</th>
+                            <th>Cantidad</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los pedidos se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
             </div>
-
-            <button onclick="despacharPedido()">Despachar Pedido</button>
         </section>
-
     </div>
 
     <script>
-        // Lógica para cargar y despachar pedidos
-        function despacharPedido() {
-            console.log("Pedido despachado");
-            // Lógica de despachar pedido
+        // Lógica para cargar los pedidos
+        async function cargarPedidos() {
+            try {
+                const response = await fetch('/api/pedidos');
+                const pedidos = await response.json();
+                
+                const pedidosTableBody = document.querySelector('#pedidosTable tbody');
+                pedidosTableBody.innerHTML = ''; // Limpiamos la tabla antes de añadir nuevos pedidos
+                
+                pedidos.forEach(pedido => {
+                    if (pedido.estado === 'pendiente') { // Solo mostrar pedidos pendientes
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${pedido.mesa}</td>
+                            <td>${pedido.pizza}</td>
+                            <td>${pedido.cantidad}</td>
+                            <td>${pedido.estado}</td>
+                            <td>
+                                <button onclick="despacharPedido('${pedido._id}')">Despachar</button>
+                            </td>
+                        `;
+                        pedidosTableBody.appendChild(row);
+                    }
+                });
+            } catch (error) {
+                console.error('Error al cargar los pedidos:', error);
+            }
         }
+
+        // Lógica para despachar un pedido
+        async function despacharPedido(pedidoId) {
+            try {
+                const response = await fetch(`/api/pedido/${pedidoId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert(result.message);
+                    cargarPedidos(); // Recargar la lista de pedidos después de despachar
+                } else {
+                    alert('Error al despachar el pedido');
+                }
+            } catch (error) {
+                console.error('Error al despachar el pedido:', error);
+                alert('Hubo un error al despachar el pedido');
+            }
+        }
+
+        // Cargar los pedidos al cargar la página
+        window.onload = cargarPedidos;
 
         // Cargar la barra de navegación desde el archivo navbar.html
         fetch('navbar.html')

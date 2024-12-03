@@ -63,11 +63,11 @@ nav ul li a:hover {
     justify-content: flex-start;
     align-items: center;
     min-height: calc(100vh - 60px); /* Ocupa toda la altura visible menos la navbar */
-    padding-top: 60px; /* Asegura que haya espacio debajo de la barra fija */
+    padding-top: 60px; /* Espacio para la barra fija */
 }
 
-/* Estilo de la sección de realizar pedido */
-section {
+/* Estilo de la sección de mesero */
+#mesero {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -81,47 +81,39 @@ section {
     width: 100%; /* Ocupa todo el ancho disponible */
 }
 
-section h2 {
+#mesero h2 {
     color: #d9534f; /* Rojo para los encabezados */
     margin-bottom: 20px;
 }
 
-section label {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 8px;
-    display: block;
-}
-
-section input[type="number"],
-section select {
+/* Estilo de la tabla de pedidos */
+#pedidosTable {
     width: 100%;
-    padding: 12px;
+    border-collapse: collapse;
     margin-bottom: 20px;
+}
+
+#pedidosTable th, #pedidosTable td {
+    padding: 10px;
+    text-align: center;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
 }
 
-section input[type="number"]:focus,
-section select:focus {
-    border-color: #f0ad4e; /* Naranja cuando se selecciona */
-    outline: none;
+#pedidosTable th {
+    background-color: #f0ad4e;
+    color: white;
 }
 
-/* Estilo de los botones */
-section button {
-    background-color: #f0ad4e; /* Naranja restaurante */
+#pedidosTable td button {
+    background-color: #f0ad4e;
     color: white;
     border: none;
-    padding: 14px 30px;
-    margin-top: 20px;
+    padding: 8px 15px;
     border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-section button:hover {
-    background-color: #d9534f; /* Rojo restaurante en hover */
+#pedidosTable td button:hover {
+    background-color: #d9534f;
 }
