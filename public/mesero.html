@@ -5,23 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Mesero</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset de estilos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f8f4e3; /* Fondo crema suave */
+            color: #333;
+            padding: 0 20px;
+        }
+
+        /* Barra de Navegación - Horizontal en la parte superior */
+        nav {
+            background-color: #d9534f;  /* Rojo tipo restaurante */
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Asegura que la barra cubra todo el ancho */
+            position: fixed; /* La hace fija en la parte superior */
+            top: 0; /* Pegada al borde superior */
+            left: 0; /* Alineada al borde izquierdo */
+            z-index: 1000; /* Asegura que esté encima de otros elementos */
+        }
+
+        /* Lista de navegación */
+        nav ul {
+            list-style: none;
+            display: flex; /* Hace que los elementos sean horizontales */
+            justify-content: center; /* Centra los elementos */
+            padding: 0;
+            margin: 0; /* Elimina cualquier margen extra */
+        }
+
+        nav ul li {
+            margin: 0 20px; /* Espaciado entre los elementos */
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 10px 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: #f0ad4e;  /* Naranja claro en hover */
+            color: #fff;
+        }
+
+        /* Contenedor principal de la sección */
+        #main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: calc(100vh - 60px); /* Ocupa toda la altura visible menos la navbar */
+            padding-top: 60px; /* Espacio para la barra fija */
+        }
+
+        /* Estilo de la sección de mesero */
+        #mesero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Ancho máximo del contenedor */
+            margin-top: 80px; /* Espacio debajo de la barra de navegación */
+            width: 100%; /* Ocupa todo el ancho disponible */
+        }
+
+        #mesero h2 {
+            color: #d9534f; /* Rojo para los encabezados */
+            margin-bottom: 20px;
+        }
+
+        /* Estilo de la lista de pedidos */
+        #pedidosList {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo de los botones */
+        #mesero button {
+            background-color: #f0ad4e; /* Naranja restaurante */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #mesero button:hover {
+            background-color: #d9534f; /* Rojo restaurante en hover */
+        }
+
+    </style>
 </head>
 <body>
     <!-- Barra de Navegación Cargada Dinámicamente -->
     <div id="navbar-placeholder"></div>
 
-    <section id="mesero">
-        <h2>Pedidos Pendientes</h2>
-        <div id="pedidosList">
-            <!-- Aquí se cargarán los pedidos pendientes desde la API -->
-        </div>
+    <!-- Contenedor principal para el contenido -->
+    <div id="main-container">
 
-        <button onclick="despacharPedido()">Despachar Pedido</button>
-    </section>
+        <!-- Sección de Mesero -->
+        <section id="mesero">
+            <h2>Pedidos Pendientes</h2>
+            <div id="pedidosList">
+                <!-- Aquí se cargarán los pedidos pendientes desde la API -->
+                <p>No hay pedidos pendientes.</p> <!-- Aquí se pueden agregar los pedidos dinámicamente -->
+            </div>
+
+            <button onclick="despacharPedido()">Despachar Pedido</button>
+        </section>
+
+    </div>
 
     <script>
         // Lógica para cargar y despachar pedidos
         function despacharPedido() {
+            console.log("Pedido despachado");
             // Lógica de despachar pedido
         }
 

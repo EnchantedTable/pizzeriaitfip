@@ -3,18 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizzería</title>
+    <title>Pizzería Napoli</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset de estilos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f8f4e3; /* Fondo crema suave */
+            color: #333;
+            padding: 0 20px;
+        }
+
+        /* Barra de Navegación - Horizontal en la parte superior */
+        nav {
+            background-color: #d9534f;  /* Rojo tipo restaurante */
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Asegura que la barra cubra todo el ancho */
+            position: fixed; /* La hace fija en la parte superior */
+            top: 0; /* Pegada al borde superior */
+            left: 0; /* Alineada al borde izquierdo */
+            z-index: 1000; /* Asegura que esté encima de otros elementos */
+        }
+
+        /* Lista de navegación */
+        nav ul {
+            list-style: none;
+            display: flex; /* Hace que los elementos sean horizontales */
+            justify-content: center; /* Centra los elementos */
+            padding: 0;
+            margin: 0; /* Elimina cualquier margen extra */
+        }
+
+        nav ul li {
+            margin: 0 20px; /* Espaciado entre los elementos */
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 10px 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background-color: #f0ad4e;  /* Naranja claro en hover */
+            color: #fff;
+        }
+
+        /* Contenedor principal de la sección */
+        #main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: calc(100vh - 60px); /* Ocupa toda la altura visible menos la navbar */
+            padding-top: 60px; /* Espacio para la barra fija */
+        }
+
+        /* Centrado de la sección #intro */
+        #intro {
+            display: flex; /* Activa Flexbox */
+            flex-direction: column; /* Coloca los elementos en columna */
+            justify-content: center; /* Centra los elementos verticalmente */
+            align-items: center; /* Centra los elementos horizontalmente */
+            text-align: center; /* Centra el texto */
+            padding: 20px;
+        }
+
+        /* Botón dentro de #intro */
+        #intro .btn {
+            background-color: #f0ad4e; /* Naranja restaurante */
+            color: #333;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px; /* Espaciado superior */
+            transition: background-color 0.3s ease;
+        }
+
+        #intro .btn:hover {
+            background-color: #d9534f; /* Rojo restaurante en hover */
+            color: white;
+        }
+
+        /* Sección de descripción de las pizzas */
+        #pizza-description {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        #pizza-description h2 {
+            color: #d9534f; /* Rojo para los encabezados */
+            margin-bottom: 20px;
+        }
+
+        #pizza-description .pizza-item {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #pizza-description .pizza-item img {
+            width: 250px; /* Ajusta el tamaño de la imagen */
+            height: auto;
+            border-radius: 8px;
+        }
+
+        #pizza-description .pizza-item .description {
+            max-width: 500px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        #pizza-description .pizza-item .description h3 {
+            color: #d9534f; /* Rojo para los nombres de las pizzas */
+            margin-bottom: 10px;
+        }
+
+        #pizza-description .pizza-item .description p {
+            margin-bottom: 15px;
+        }
+
+        /* Estilo del logo */
+        #intro .logo {
+            margin-top: 20px;
+            max-width: 200px; /* Ajusta el tamaño máximo del logo */
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <!-- Barra de Navegación Cargada Dinámicamente -->
     <div id="navbar-placeholder"></div>
 
-    <section id="intro">
-        <h1>Bienvenido a la Pizzería</h1>
-        <p>Elige la pizza que más te guste y haz tu pedido fácilmente.</p>
-        <a href="login.html" class="btn">Iniciar Sesión</a>
-    </section>
+    <!-- Contenedor principal para el contenido -->
+    <div id="main-container">
+
+        <!-- Sección de Introducción -->
+        <section id="intro">
+            <h1>Bienvenido a la Pizzería Napoli</h1>
+            
+            <!-- Logo de la Pizzería debajo del texto -->
+            <img src="path_to_logo/logo.png" alt="Logo de la Pizzería Napoli" class="logo">
+
+            <p>Elige la pizza que más te guste y haz tu pedido fácilmente.</p>
+            <a href="detalles_pizzas.html" class="btn">Ver pizzas</a>
+        </section>
 
     <script>
         // Cargar la barra de navegación desde el archivo navbar.html
@@ -22,6 +178,9 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error al cargar la barra de navegación:', error);
             });
     </script>
 </body>
