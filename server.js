@@ -17,6 +17,42 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, se
     .then(() => console.log("Conectado a la base de datos"))
     .catch(err => console.error("Error de conexión a MongoDB:", err));
 
+// Esquema de Pizza
+const pizzaSchema = new mongoose.Schema({
+    nombre: String,
+    descripcion: String,
+    precio: Number,
+    imagen: String
+});
+
+const Pizza = mongoose.model('Pizza', pizzaSchema);
+
+// Ruta para obtener todas las pizzas
+app.get('/api/pizzas', async (req, res) => {
+    try {
+        const pizzas = await Pizza.find(); // Obtener todas las pizzas
+        res.status(200).json(pizzas);  // Enviar las pizzas como JSON
+    } catch (error) {
+        console.error('Error al obtener las pizzas:', error);
+        res.status(500).send('Error al obtener las pizzas');
+    }
+});
+
+// Ruta para crear una nueva pizza
+app.post('/api/pizza', async (req, res) => {
+    const { nombre } = req.body;
+
+    const nuevaPizza = new Pizza({ nombre });
+
+    try {
+        await nuevaPizza.save();
+        res.status(201).json({ message: 'Pizza creada con éxito' });
+    } catch (error) {
+        console.error('Error al guardar la pizza:', error);
+        res.status(500).send('Error al guardar la pizza');
+    }
+});
+
 // Esquema de Pedido
 const pedidoSchema = new mongoose.Schema({
     mesa: Number,
@@ -54,28 +90,6 @@ app.get('/api/pedidos', async (req, res) => {
     } catch (error) {
         console.error('Error al obtener los pedidos:', error);
         res.status(500).send('Error al obtener los pedidos');
-    }
-});
-
-// Ruta para actualizar el estado de un pedido
-app.put('/api/pedido/:id', async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const pedido = await Pedido.findByIdAndUpdate(
-            id,
-            { estado: 'despachado' }, // Cambia el estado a 'despachado'
-            { new: true } // Retorna el documento actualizado
-        );
-
-        if (!pedido) {
-            return res.status(404).json({ message: 'Pedido no encontrado' });
-        }
-
-        res.status(200).json({ message: 'Pedido despachado con éxito', pedido });
-    } catch (error) {
-        console.error('Error al despachar el pedido:', error);
-        res.status(500).send('Error al despachar el pedido');
     }
 });
 
