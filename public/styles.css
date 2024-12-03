@@ -17,14 +17,88 @@ body {
 nav {
     background-color: #d9534f;  /* Rojo tipo restaurante */
     color: #fff;
-    padding: 10px 0; /* Se asegura de que el padding vertical esté bien ajustado */
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Asegura que la barra cubra todo el ancho */
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: fixed; /* La hace fija en la parte superior */
-    top: 0; /* Pegada al borde superior */
-    left: 0; /* Alineada al borde izquierdo */
-    z-index: 1000; /* Asegura que esté encima de otros elementos */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Menú desplegable a la izquierda */
+.menu {
+    position: relative;
+}
+
+.menu-btn {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-list {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background-color: #fff;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    list-style-type: none;
+    margin: 0;
+}
+
+.menu-list li {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-list li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-list li a i {
+    margin-right: 10px;
+}
+
+/* Estilo para los iconos */
+.menu-list li a:hover {
+    background-color: #f0ad4e;
+    color: white;
+}
+
+/* Mostrar el menú desplegable cuando se pasa el cursor sobre el botón */
+.menu:hover .menu-list {
+    display: block;
+}
+
+/* Título Napoli centrado */
+.navbar-title {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.navbar-title h1 {
+    font-size: 24px;
+    margin: 0;
+    color: white;
 }
 
 /* Lista de navegación */
@@ -54,11 +128,6 @@ nav ul li a {
 nav ul li a:hover {
     background-color: #f0ad4e;  /* Naranja claro en hover */
     color: #fff;
-}
-
-/* Aseguramos que el contenido principal no quede cubierto por la barra */
-body {
-    padding-top: 60px; /* Deja espacio suficiente para que la barra fija no cubra contenido */
 }
 
 /* Estilo de los contenedores */
@@ -101,6 +170,75 @@ button:hover {
     background-color: #d9534f; /* Rojo restaurante en hover */
 }
 
+/* Estilo de formularios */
+input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="number"]:focus, select:focus {
+    border-color: #f0ad4e;  /* Naranja cuando se selecciona */
+    outline: none;
+}
+
+/* Diseño de la página de detalles de pizzas */
+.pizza-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.pizza-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.pizza-item:hover {
+    transform: scale(1.05);
+}
+
+.pizza-item h3 {
+    margin-bottom: 10px;
+    color: #d9534f;  /* Rojo para el nombre de las pizzas */
+}
+
+.pizza-item p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.pizza-item button {
+    background-color: #f0ad4e;
+    color: #333;
+}
+
+.pizza-item button:hover {
+    background-color: #d9534f;
+}
+
+/* Estilo de la página de login */
+#login {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+#login button {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
 /* Modo Nocturno */
 body.night-mode {
     background-color: #333;
@@ -133,5 +271,9 @@ body.night-mode nav ul li a:hover {
 
     section {
         padding: 15px;
+    }
+
+    .pizza-list {
+        grid-template-columns: 1fr;
     }
 }
